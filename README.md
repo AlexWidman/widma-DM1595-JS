@@ -1,10 +1,12 @@
 # DM1595 JavaScript exercises
-=================================================
+
 Your task is to program the data model (including application logic). The data model contains the abstract data of an interactive application, e.g. the non-graphical part.
 
 The application logic is:
 - the dinner may have 1 or more guests, the default should be 2
 - only one dish of a certain type can exist in the menu
+
+Dishes and ingredients are stored in an array constant. You need to implement dish search functionality (the DishSource object).xs
 
 To implement this, you only need to modify [js/DinnerModel.js](/js/DinnerModel.js) If you modify the other files, merging might be a bit more tricky for you when moving to the next lab.
 
