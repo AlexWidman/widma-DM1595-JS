@@ -159,7 +159,7 @@ const dishesConst = [{
 }, {
   'id': 101,
   'name': 'MD 2',
-  'type': 'main dish',
+  'type': 'main course',
   'image': 'bakedbrie.jpg',
   'description': "Here is how you make it... Lore ipsum...",
   'ingredients': [{
@@ -181,7 +181,7 @@ const dishesConst = [{
 }, {
   'id': 102,
   'name': 'MD 3',
-  'type': 'main dish',
+  'type': 'main course',
   'image': 'meatballs.jpg',
   'description': "Here is how you make it... Lore ipsum...",
   'ingredients': [{
@@ -203,7 +203,7 @@ const dishesConst = [{
 }, {
   'id': 103,
   'name': 'MD 4',
-  'type': 'main dish',
+  'type': 'main course',
   'image': 'meatballs.jpg',
   'description': "Here is how you make it... Lore ipsum...",
   'ingredients': [{

@@ -2,14 +2,20 @@ const assert = chai.assert;
 const expect = chai.expect;
 
 describe("DinnerModel", function() {
-    this.timeout(200000);
+    const testFunctional = method =>
+	  it(method.name+" functional", ()=>{
+	      expect(/(for\s*\(|if\s*\()/g.test(method.toString())).to.equal(false);
+	  });
+
+
+    this.timeout(200000);  // allow for debugging in developer tools
     let model = new DinnerModel();
     
     beforeEach(() => {
 	model = new DinnerModel();
     });
 
-    describe("number of guests", () => {
+    describe("W1 number of guests", () => {
 	it("default number of guests is 2", ()=> {
 	    expect(model.getNumberOfGuests()).to.equal(2);
 	});
@@ -33,7 +39,7 @@ describe("DinnerModel", function() {
 	});
     });
     
-    describe("getting individual dishes", () => {
+    describe("W1 getting individual dishes", () => {
 	it("gets the correct dish", () => {
 	    const dish1 = DishSource.getDishDetails(1);
 	    expect(dish1.id).to.equal(1);
@@ -53,45 +59,7 @@ describe("DinnerModel", function() {
 	});
     });
     
-    describe("filtering for dishes", () => {
-	it("returns all dishes if no search criteria are specified", () => {
-	    const allDishes = DishSource.searchDishes({});
-	    expect(allDishes.length).to.equal(10);
-	});
-	
-	it("returns the correct dish type", () => {
-	    let dishes = DishSource.searchDishes({type:"starter"});
-	    const onlyHasStarters = dishes.every(dish => dish.type === "starter");
-	    expect(onlyHasStarters).to.equal(true);
-	    
-	    dishes = DishSource.searchDishes({type: "main dish"});
-	    const onlyHasMain = dishes.every(dish => dish.type === "main dish");
-	    expect(onlyHasMain).to.equal(true);
-	});
-	
-	it("filters with keywords", () => {
-	    let dishes = DishSource.searchDishes({type:"", query:"French"});
-	    let allDishesMatch = dishes.every(dish => dish.name.includes("French"));
-	    expect(dishes.length).to.be.above(0);
-	    expect(allDishesMatch).to.equal(true);
-	    
-	    dishes = DishSource.searchDishes({type:"", query:"Meat"});
-	    allDishesMatch = dishes.every(dish => dish.name.includes("Meat"));
-	    expect(dishes.length).to.be.above(0);
-	    expect(allDishesMatch).to.equal(true);
-	});
-	
-	it("returns correct dishes with filter and type", () => {
-	    const dishes = DishSource.searchDishes({type:"starter", query:"Sour"});
-	    const allDishesMatch = dishes.every(
-		dish => dish.name.includes("Sour") && dish.type === "starter"
-	    );
-	    expect(dishes.length).to.be.above(0);
-	    expect(allDishesMatch).to.equal(true);
-	});
-    });
-    
-    describe("menu", () => {
+    describe("W1 menu", () => {
 	it("can add dishes", () => {
 	    model.addToMenu(DishSource.getDishDetails(1));
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(1));
@@ -128,8 +96,85 @@ describe("DinnerModel", function() {
 	    expect(model.getDishOfType(DishSource.getDishDetails(2).type)).to.equal(DishSource.getDishDetails(2));
 	});
     });
+    
+    describe("W2 async", () => {
+	it("getDishDetails asynchronous", done=>{
+	    DishSource.getDishDetailsAsync(1, dish1=>{
+		expect(dish1.id).to.equal(1);
+		expect(dish1.name).to.equal("French toast");
+		done();
+	    });
+	});
+    });
 
-    describe("totals", () => {
+    describe("W2: make W1 methods functional", () => {
+	testFunctional(DishSource.getDishDetails);
+	testFunctional(model.addToMenu);
+	testFunctional(model.removeFromMenu);
+	testFunctional(model.getDishOfType);
+    });
+
+    describe("W2 immutable state", () => {
+	it("addToMenu creates new dish array", () => {
+	    const x= model.dishes;
+	    model.addToMenu(DishSource.getDishDetails(1));
+	    expect(model.dishes).to.not.equal(x);
+	});
+	it("removeFromMenu creates new dish array", () => {
+	    model.addToMenu(DishSource.getDishDetails(1));
+	    const x= model.dishes;
+	    model.removeFromMenu({id:1});
+	    expect(model.dishes).to.not.equal(x);
+	});
+	it("getMenu returns a copy, so the caller cannot mutate the model dishes", () => {
+	    model.addToMenu(DishSource.getDishDetails(1));
+	    expect(model.getMenu()).to.not.equal(model.dishes);
+	});
+	
+    });
+    describe("W2 filtering for dishes", () => {
+	it("searchDishes uses destructuring for its parameter", ()=>{
+	    expect(/(searchDishes\s*\(\s*\{)/g.test(DishSource.searchDishes)).to.equal(true);
+	});
+	it("returns all dishes if no search criteria are specified", () => {
+	    const allDishes = DishSource.searchDishes({});
+	    expect(allDishes.length).to.equal(10);
+	});
+	testFunctional(DishSource.searchDishes);
+	
+	it("returns the correct dish type", () => {
+	    let dishes = DishSource.searchDishes({type:"starter"});
+	    const onlyHasStarters = dishes.every(dish => dish.type === "starter");
+	    expect(onlyHasStarters).to.equal(true);
+	    
+	    dishes = DishSource.searchDishes({type: "main course"});
+	    const onlyHasMain = dishes.every(dish => dish.type === "main course");
+	    expect(onlyHasMain).to.equal(true);
+	});
+	
+	it("filters with keywords", () => {
+	    let dishes = DishSource.searchDishes({type:"", query:"French"});
+	    let allDishesMatch = dishes.every(dish => dish.name.includes("French"));
+	    expect(dishes.length).to.be.above(0);
+	    expect(allDishesMatch).to.equal(true);
+	    
+	    dishes = DishSource.searchDishes({type:"", query:"Meat"});
+	    allDishesMatch = dishes.every(dish => dish.name.includes("Meat"));
+	    expect(dishes.length).to.be.above(0);
+	    expect(allDishesMatch).to.equal(true);
+	});
+	
+	it("returns correct dishes with filter and type", () => {
+	    const dishes = DishSource.searchDishes({type:"starter", query:"Sour"});
+	    const allDishesMatch = dishes.every(
+		dish => dish.name.includes("Sour") && dish.type === "starter"
+	    );
+	    expect(dishes.length).to.be.above(0);
+	    expect(allDishesMatch).to.equal(true);
+	});
+    });
+    
+    describe("W2 totals", () => {
 	it("ingredients", () => {
 	    model.addToMenu(DishSource.getDishDetails(2));
 	    model.addToMenu(DishSource.getDishDetails(100));
@@ -140,10 +185,23 @@ describe("DinnerModel", function() {
 	    expect(model.getDishPrice(DishSource.getDishDetails(2))).to.equal(52);
 	    expect(model.getDishPrice(DishSource.getDishDetails(100))).to.equal(2559.5);
 	});
+	testFunctional(model.getDishPrice);
 	it("total price", () => {
 	    model.addToMenu(DishSource.getDishDetails(2));
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    expect(model.getDinnerPrice()).to.equal(2*(52+2559.5));
 	});
+	testFunctional(model.getDinnerPrice);
+    });
+    describe("Advanced (bonus)", () => {
+	testFunctional(model.getIngredients);
+	it("getDishDetails promise", done=>{
+	    DishSource.getDishDetailsPromise(1).then(dish1=>{
+		expect(dish1.id).to.equal(1);
+		expect(dish1.name).to.equal("French toast");
+		done();
+	    });
+	});
     });
 });
+

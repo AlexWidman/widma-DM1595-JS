@@ -5,7 +5,7 @@ class DinnerModel {
     constructor(guests/* FIXME default value 2 */, dishes=[] ) {
 	// note that you always need to use this when you refer to an object property!
 	this.guests= guests;
-	// TODO
+	this.dishes=dishes;
     }
     
     /* Set the number of guests to the given value. 
@@ -37,8 +37,14 @@ class DinnerModel {
 	//TODO 
     }
 
+    /* Return the dish of the given type from the menu, or undefined */
+    getDishOfType(type){
+	//TODO 
+    }
+    
     /* Return an ingredient list, with each ingredient showing up maximum once, and the quantities added up.
        Assume that the ingredient price is the same in all dishes that use a certain ingredient.
+       Advanced (bonus) : implement functionally, without variable assignments, for/loops() or if()
     */
     getIngredients(){
 	//TODO 
@@ -50,7 +56,7 @@ class DinnerModel {
 	//TODO 
     }
 
-    /* Total price for the dinner.  */
+    /* Total price for the dinner given the number of guests */
     getDinnerPrice(){
 	//TODO 
     }    
@@ -62,6 +68,21 @@ class DinnerModel {
    Since methods are object members, you neeed to separate them with comma 
 */
 const  DishSource={
+    /* Returns a dish of specific ID */
+    getDishDetails(id) {
+	//TODO 
+    },
+
+    /* simulate fetching the dish asyncrhonously: 
+       assume that the callback parameter is a function.
+       wait for a random time (up to 1s), then call the callback with the requested dish as parameter 
+       Example use:
+       DishSource.getDishDetailsAsync(1, console.log)
+    */
+    getDishDetailsAsync(id, callback) {
+	//TODO 
+    },
+
     /* 
        Search for dishes. 
        searchParam can have the following properties (search criteria):
@@ -72,10 +93,11 @@ const  DishSource={
     searchDishes(searchParams) {
 	//TODO 
     },
-    
-    //Returns a dish of specific ID
-    getDishDetails(id) {
+    /* advanced: asynchronous dish  retrieval as a Promise 
+              DishSource.getDishDetailsPromise(1).then(console.log).catch(console.err)
+     */
+    getDishDetailsPromise(id) {
 	//TODO 
-    }, // extra comma is legal in object properties
+    },    // extra comma is legal in object properties
 };  /* good to have a semicolon after a let or const declaration */
 
