@@ -35,9 +35,6 @@ Tests marked *W2* must pass during the second JavaScript week (work in pairs). W
 
 Tests marked Advanced(bonus) give one bonus each.
 
-## Advanced
-DinnerModel.getIngredients() implementeed without variable assignments, for() or if()
-
 ## What's in this repo
 -----
 
