@@ -6,7 +6,7 @@ The application logic is:
 - the dinner may have 1 or more guests, the default should be 2
 - only one dish of a certain type (starter, main course, dessert, etc) can exist in the menu
 
-Dishes and ingredients are stored in an array constant. You need to implement dish search and retrieval functionality (the DishSource object).
+Possible dishes and ingredients are stored in an array constant. You need to implement dish search and retrieval functionality (the DishSource object).
 
 To implement this, you only need to modify [js/DinnerModel.js](/js/DinnerModel.js). 
 
