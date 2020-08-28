@@ -10,6 +10,10 @@ Dishes and ingredients are stored in an array constant. You need to implement di
 
 To implement this, you only need to modify [js/DinnerModel.js](/js/DinnerModel.js). 
 
+The tests are provided for your convenience. Passing the tests is only the first step of passing the lab. You must be able to explain your code and the code may still be problematic in other ways. We also reserve the right to add more tests that check the above application logic rules.
+
+For troubleshooting, make sure to use the browser developer tools, which you can access by pressing F12 or Ctrl-Shift-i. Set a breakpoint at or before the line of code that fails.
+
 ## Setting up
 - set up your SSH key for the KTH GitHub
 - create your own copy of this repository by pressing *Fork* at the top right.
@@ -37,6 +41,7 @@ Use your procedural programming knowledge (loops, conditionals) to implement the
 -----
 
 * [index.html](/index.html) - open to run the tests. 
-* [js/DinnerModel.js](/js/DinnerModel.js) - write code here. This is a skeleton for the model of the application, but it does not yet support the functionality needed (number of guests, selected dishes, et.c.). It also contains a first dummy hardcoded "database" to use as test data.
+* [js/DinnerModel.js](/js/DinnerModel.js) - write code here. This is a skeleton for the model of the application, but it does not yet support the functionality needed (number of guests, selected dishes, et.c.).
+* [js/dishesConst.js](/js/dishesConst.js) - a dummy hardcoded "database" to use as test data. Tests work with dishes 1, 2 and 100, you can modify the other dishes if you want to test more
 * [test/dinnerModel.test.js](/test/dinnerModel.test.js) - tests for the model. You do not need to modify these, but study how they are written. You might be asked to write more tests in the future. 
 
