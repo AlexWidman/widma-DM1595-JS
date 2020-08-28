@@ -1,6 +1,6 @@
 # DM1595 JavaScript exercises
 
-Your task is to program the data model (including application logic). The data model contains the abstract data of an interactive application, e.g. the non-graphical part.
+Your task is to program the data model (including application logic) for a "dinner planner" use case. The data model contains the abstract data of an interactive application, e.g. the non-graphical part.
 
 The application logic is:
 - the dinner may have 1 or more guests, the default should be 2
@@ -8,7 +8,7 @@ The application logic is:
 
 Dishes and ingredients are stored in an array constant. You need to implement dish search functionality (the DishSource object).
 
-To implement this, you only need to modify [js/DinnerModel.js](/js/DinnerModel.js) If you modify the other files, merging might be a bit more tricky for you when moving to the next lab.
+To implement this, you only need to modify [js/DinnerModel.js](/js/DinnerModel.js). 
 
 ## Setting up
 - set up your SSH key for the KTH GitHub
@@ -30,7 +30,7 @@ Use your procedural programming knowledge (loops, conditionals) to implement the
 Re-implement the DinnerPlanner and DishSource using higher-order functions (Array.map(), reduce(), filter())
 Use immutable arrays
 Use destructuring
-Use spread syntax, object constants and other declarative notations to create objects and arrays declaratively
+Use spread syntax, object constants and other notations to create objects and arrays declaratively
 
 
 ## What's in this repo
