@@ -8,7 +8,7 @@ The application logic is:
 
 Possible dishes and ingredients are stored in an array constant. You need to implement dish search and retrieval functionality (the DishSource object).
 
-To implement this, you only need to modify [js/DinnerModel.js](/js/DinnerModel.js). 
+To implement DinnerModel and DishSource, you only need to modify [js/DinnerModel.js](/js/DinnerModel.js). 
 
 The tests are provided for your convenience. Passing the tests is only the first step of passing the lab. You must be able to explain your code and the code may still be problematic in other ways that are not covered by the tests. We may also add more tests that check the above application logic rules.
 
