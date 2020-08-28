@@ -1,5 +1,3 @@
-/*TODO compare with old dinnerModel.js and solution DinnerModel.js */
-
 //DinnerModel class
 class DinnerModel {
     
@@ -25,7 +23,9 @@ class DinnerModel {
 	//TODO 
     }
     
-    /* add a dish to the menu. If a dish with the same type already exists, remove it */
+    /* add a dish to the menu. If a dish with the same type already exists, remove it. 
+     The dish object can be obtained as a result of DishSource.getDishDetails() or DishSource.searchDishes() 
+    */
     addToMenu(dish) {
 	//TODO  
     }
@@ -39,15 +39,18 @@ class DinnerModel {
        Assume that the ingredient price is the same in all dishes that use a certain ingredient.
     */
     getIngredients(){
+	//TODO 
     }
 
     /* Utility method do compute a dish price depending on its ingredient prices and quantities.
      This method could be declared static as it does not depend on the DinnerModel data */
     getPrice(dish){
+	//TODO 
     }
 
     /* Total price for the dinner.  */
     totalPrice(){
+	//TODO 
     }    
 }
 
@@ -64,12 +67,12 @@ const  DishSource={
        - query: free text in dish name and ingredients
     */
     searchDishes(searchParams) {
-
+	//TODO 
     },
     
     //Returns a dish of specific ID
     getDishDetails(id) {
-	
+	//TODO 
     }, // extra comma is legal in object properties
 };  /* good to have a semicolon after a let or const declaration */
 
