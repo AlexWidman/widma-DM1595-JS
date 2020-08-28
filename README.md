@@ -21,7 +21,7 @@ For troubleshooting, make sure to use the browser developer tools, which you can
 - git **add** the files you modified, and **commit** as you make progress with the code
 - **push** to your KTH GitHub repository
 - in the second week, invite your lab partner to your repository and create a new *branch* to separate week 2 work from week 1
-- see [more git instructions](https://kth.instructure.com/courses/17091/pages/using-git)
+- see [more git instructions](https://kth.instructure.com/courses/21175/pages/using-git)
 
 When you are done with a lab, submit your KTH Git repository URL (and the name of the relevant branch) as answer to the Canvas assignment.
 
