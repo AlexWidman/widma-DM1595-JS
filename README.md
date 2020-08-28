@@ -14,14 +14,16 @@ The tests are provided for your convenience. Passing the tests is only the first
 
 For troubleshooting, make sure to use the browser developer tools, which you can access by pressing F12 or Ctrl-Shift-i. Set a breakpoint at or before the line of code that fails.
 
-## Setting up
+## Setting up/git
 - [set up your SSH key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for the KTH GitHub. Replace github.com in the instructions with  gits-15.sys.kth.se
-- create your own copy of this repository by pressin **Fork** at the top right.
-- checkout your KTH GitHub repository (created at the fork above) on your working computer using *git clone*
-- git *add* the files you modified, and *commit* as you make progress with the code
-- *push* to your KTH GitHub repository 
+- create your own copy of this repository by pressing **Fork** at the top right.
+- checkout your KTH GitHub repository (created at the fork above) on your working computer using **git clone**
+- git **add** the files you modified, and **commit** as you make progress with the code
+- **push** to your KTH GitHub repository
+- in the second week, invite your lab partner to your repository and create a new *branch* to separate week 2 work from week 1
+- see [more git instructions](https://kth.instructure.com/courses/17091/pages/using-git)
 
-When you are done with your work, submit your KTH Git repository URL as answer to the Canvas assignment.
+When you are done with a lab, submit your KTH Git repository URL (and the name of the relevant branch) as answer to the Canvas assignment.
 
 ## Testing
 
