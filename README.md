@@ -6,9 +6,18 @@ The application logic is:
 - the dinner may have 1 or more guests, the default should be 2
 - only one dish of a certain type can exist in the menu
 
-Dishes and ingredients are stored in an array constant. You need to implement dish search functionality (the DishSource object).xs
+Dishes and ingredients are stored in an array constant. You need to implement dish search functionality (the DishSource object).
 
 To implement this, you only need to modify [js/DinnerModel.js](/js/DinnerModel.js) If you modify the other files, merging might be a bit more tricky for you when moving to the next lab.
+
+## Setting up
+- set up your SSH key for the KTH GitHub
+- create your own copy of this repository by pressing *Fork* at the top right.
+- checkout your KTH GitHub repository (created at the fork above) on your working computer using *git clone*
+- *commit* as you make progress with the code
+- *push* to your KTH GitHub repository 
+
+When you are done with your work, submit your KTH Git repository URL as answer to the Canvas assignment.
 
 ## Testing
 
