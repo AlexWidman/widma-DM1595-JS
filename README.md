@@ -27,10 +27,10 @@ Open `index.html` in the browser and tests should run automatically
 Use your procedural programming knowledge (loops, conditionals) to implement the DinnerModel and the DishSource
 
 ## Functional and declarative JavaScript (week 2, work in progress)
-Re-implement the DinnerPlanner and DishSource using higher-order functions (Array.map(), reduce(), filter())
-Use immutable arrays
-Use destructuring
-Use spread syntax, object constants and other notations to create objects and arrays declaratively
+- re-implement the DinnerPlanner and DishSource using higher-order functions (Array.map(), reduce(), filter())
+- use immutable arrays
+- use destructuring
+- use spread syntax, object constants and other notations to create objects and arrays declaratively
 
 
 ## What's in this repo
