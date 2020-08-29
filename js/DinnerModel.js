@@ -2,10 +2,14 @@
 class DinnerModel {
     
     /* Note the default value of function parameters */
-    constructor(guests/* FIXME default value 2 */, dishes=[] ) {
+    constructor(guestsParam/* FIXME default value 2 */, dishesParam=[] ) {
 	// note that you always need to use this when you refer to an object property!
-	this.guests= guests;
-	this.dishes=dishes;
+	this.guests= guestsParam;  
+	
+	this.dishes= [...dishesParam]; // clone the dishesParam array using spread syntax.
+	// We clone it to ensure that if the dishesParam array content is changed after the call to new DinnerModel(num, dishesParam),
+	//    our DinnerModel object is not affected
+	// same as this.dishes= new Array(dishesParam)
     }
     
     /* Set the number of guests to the given value. 
