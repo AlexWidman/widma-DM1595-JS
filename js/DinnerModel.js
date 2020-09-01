@@ -16,6 +16,7 @@ class DinnerModel {
        The value must be a positive integer, throw an Error otherwise.
      */
     setNumberOfGuests(num) {
+	// TODO throw an error if num is not a positive integer. Then:
 	// this.guests= TODO ;
     }
 
