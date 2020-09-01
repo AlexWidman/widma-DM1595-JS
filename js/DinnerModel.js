@@ -8,7 +8,7 @@ class DinnerModel {
 	
 	this.dishes= [...dishesParam]; // clone the dishesParam array using spread syntax.
 	// We clone it to ensure that if the dishesParam array content is changed after the call to new DinnerModel(num, dishesParam),
-	//    our DinnerModel object is not affected
+	//    then our DinnerModel object is not affected.
 	// same as this.dishes= new Array(dishesParam)
     }
     
@@ -16,15 +16,16 @@ class DinnerModel {
        The value must be a positive integer, throw an Error otherwise.
      */
     setNumberOfGuests(num) {
-	//TODO 
+	// this.guests= TODO ;
     }
 
     /* Return the number of guests */ 
     getNumberOfGuests() {
-	//TODO 
+	// return this.  TODO 
     }
     
-    /* Return all the dishes on the menu. */
+    /* Return all the dishes on the menu. 
+     */
     getMenu() {
 	//TODO 
     }
@@ -93,6 +94,11 @@ const  DishSource={
        - type: the dish type
        - query: free text in dish name and ingredients
        If no search criterion is specified, all dishes are returned.
+       Example use: 
+       DishSource.searchDishes({type:"main course", query:"pizza"})
+       DishSource.searchDishes({type:"main course"})
+       DishSource.searchDishes({query:"flour"})
+       DishSource.searchDishes({})  returns all dishes
     */
     searchDishes(searchParams) {
 	//TODO 
