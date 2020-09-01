@@ -8,7 +8,7 @@ describe("DinnerModel", function() {
 	  });
 
 
-    this.timeout(2000);  // increase to allow debugging during the test run
+    this.timeout(200000);  // increase to allow debugging during the test run
     let model = new DinnerModel();
     
     beforeEach(() => {
@@ -104,7 +104,7 @@ describe("DinnerModel", function() {
 		expect(dish1.name).to.equal("French toast");
 		done();
 	    });
-	});
+	}).timeout(2000);
     });
 
     describe("W2: make W1 methods functional", () => {
@@ -201,7 +201,7 @@ describe("DinnerModel", function() {
 		expect(dish1.name).to.equal("French toast");
 		done();
 	    });
-	});
+	}).timeout(2000);
     });
 });
 
