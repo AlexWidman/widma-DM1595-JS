@@ -8,7 +8,7 @@ describe("DinnerModel", function() {
 	  });
 
 
-    this.timeout(200000);  // allow for debugging in developer tools
+    this.timeout(2000);  // increase to allow debugging during the test run
     let model = new DinnerModel();
     
     beforeEach(() => {
