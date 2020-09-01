@@ -48,7 +48,7 @@ class DinnerModel {
 	//TODO 
     }
     
-    /* W2: Return an ingredient list, with each ingredient showing up maximum once, and the quantities added up.
+    /* Week 2: Return an ingredient list, with each ingredient showing up maximum once, and the quantities added up.
        Assume that the ingredient price is the same in all dishes that use a certain ingredient.
        Advanced (bonus) : implement functionally, without variable assignments, for/loops() or if()
     */
@@ -56,13 +56,13 @@ class DinnerModel {
 	//TODO 
     }
 
-    /* W2: Utility method do compute a dish price depending on its ingredient prices and quantities.
+    /* Week 2: Utility method do compute a dish price depending on its ingredient prices and quantities.
      This method could be declared static as it does not depend on the DinnerModel data */
     getDishPrice(dish){
 	//TODO 
     }
 
-    /* W2: Total price for the dinner given the number of guests */
+    /* Week 2: Total price for the dinner given the number of guests */
     getDinnerPrice(){
 	//TODO 
     }    
@@ -79,7 +79,7 @@ const  DishSource={
 	//TODO 
     },
 
-    /* simulate fetching the dish asynchronously: 
+    /* Week 2: simulate fetching the dish asynchronously: 
        assume that the callback parameter is a function.
        wait for a random time (up to 1s), then call the callback with the requested dish as parameter 
        Example use:
@@ -90,7 +90,7 @@ const  DishSource={
     },
 
     /* 
-       Search for dishes (Week 2)
+       Week 2: Search for dishes 
        searchParam can have the following properties (search criteria):
        - type: the dish type
        - query: free text in dish name and ingredients
