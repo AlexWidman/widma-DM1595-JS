@@ -32,10 +32,12 @@ describe("DinnerModel", function() {
 	it("number of guests is a positive integer", () => {
 	    model.setNumberOfGuests(1);
 	    expect(model.getNumberOfGuests()).to.equal(1);
+	    model.setNumberOfGuests(2);
+	    expect(model.getNumberOfGuests()).to.equal(2);
 	    
-	    // this should not change the value
 	    expect(()=>model.setNumberOfGuests(-1)).to.throw();
-	    //expect(model.getNumberOfGuests()).to.equal(1);
+	    expect(()=>model.setNumberOfGuests(0)).to.throw();
+	    expect(()=>model.setNumberOfGuests(3.14159265)).to.throw();
 	});
     });
     
@@ -63,37 +65,64 @@ describe("DinnerModel", function() {
 	it("can add dishes", () => {
 	    model.addToMenu(DishSource.getDishDetails(1));
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(1));
+	    expect(model.dishes.length).to.equal(1);
 	    
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(1));
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(100));
+	    expect(model.dishes.length).to.equal(2);
 	});
 	
 	it("overwrites dishes of the same type when adding", () => {
+	    model.addToMenu(DishSource.getDishDetails(200));
 	    model.addToMenu(DishSource.getDishDetails(1));
+	    model.addToMenu(DishSource.getDishDetails(100));
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(1));
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(100));
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(200));
+	    expect(model.dishes.length).to.equal(3);
 	    
 	    model.addToMenu(DishSource.getDishDetails(2));
 	    // the old starter dish should no longer exist
 	    expect(model.getMenu()).to.not.include(DishSource.getDishDetails(1));
 	    // the new dish should exist
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(2));
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(200));
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(100));
+	    expect(model.dishes.length).to.equal(3);
 	});
 	
 	it("can remove dishes", () => {
+	    model.addToMenu(DishSource.getDishDetails(100));
 	    model.addToMenu(DishSource.getDishDetails(1));
+	    model.addToMenu(DishSource.getDishDetails(200));
+	    expect(model.dishes.length).to.equal(3);
+	    
 	    // dish 1 should be in the menu
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(1));
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(100));
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(200));
 	    
 	    model.removeFromMenu({id:1});
 	    // should now be removed
 	    expect(model.getMenu()).to.not.include(DishSource.getDishDetails(1));
+
+	    expect(model.dishes.length).to.equal(2);
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(100));
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(200));
 	});
 
 	it("dish of type", () => {
 	    model.addToMenu(DishSource.getDishDetails(2));
+	    model.addToMenu(DishSource.getDishDetails(100));
+	    model.addToMenu(DishSource.getDishDetails(200));
+	    expect(model.dishes.length).to.equal(3);
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(2));
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(200));
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(100));
 	    expect(model.getDishOfType(DishSource.getDishDetails(2).type)).to.equal(DishSource.getDishDetails(2));
+	    expect(model.getDishOfType(DishSource.getDishDetails(100).type)).to.equal(DishSource.getDishDetails(100));
+	    expect(model.getDishOfType(DishSource.getDishDetails(200).type)).to.equal(DishSource.getDishDetails(200));
 	});
     });
     
