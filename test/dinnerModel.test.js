@@ -1,10 +1,13 @@
+/* Tests were improved after the Week 1 experience */
+
 const assert = chai.assert;
 const expect = chai.expect;
 
 describe("DinnerModel", function() {
     const testFunctional = method =>
 	  it(method.name+" functional", ()=>{
-	      expect(/(for\s*\(|if\s*\()/g.test(method.toString())).to.equal(false);
+	      expect(/(var\s+|let\s+|for\s*\(|while\s*\(|if\s*\()/g.test(method.toString())).to.equal(false);
+	      
 	  });
 
 
