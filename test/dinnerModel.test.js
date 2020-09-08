@@ -207,12 +207,6 @@ describe("DinnerModel", function() {
     });
     
     describe("W2 totals", () => {
-	it("ingredients", () => {
-	    model.addToMenu(DishSource.getDishDetails(2));
-	    model.addToMenu(DishSource.getDishDetails(100));
-	    expect(model.getIngredients()).to.include.deep.members([{quantity: 5, price: 10, name: "eggs", unit:''}]);
-	    expect(model.getIngredients()).to.include.deep.members([{quantity: 80, price: 0, name: "water", unit:'ml'}]);
-	});
 	it("dish price", () => {
 	    expect(model.getDishPrice(DishSource.getDishDetails(2))).to.equal(52);
 	    expect(model.getDishPrice(DishSource.getDishDetails(100))).to.equal(2559.5);
@@ -224,6 +218,12 @@ describe("DinnerModel", function() {
 	    expect(model.getDinnerPrice()).to.equal(2*(52+2559.5));
 	});
 	testFunctional(model.getDinnerPrice);
+	it("ingredients (procedural, functional is bonus!)", () => {
+	    model.addToMenu(DishSource.getDishDetails(2));
+	    model.addToMenu(DishSource.getDishDetails(100));
+	    expect(model.getIngredients()).to.include.deep.members([{quantity: 5, price: 10, name: "eggs", unit:''}]);
+	    expect(model.getIngredients()).to.include.deep.members([{quantity: 80, price: 0, name: "water", unit:'ml'}]);
+	});
     });
     describe("Advanced (bonus)", () => {
 	testFunctional(model.getIngredients);
