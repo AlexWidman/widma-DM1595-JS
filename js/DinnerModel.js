@@ -38,7 +38,10 @@ class DinnerModel {
 	//TODO  
     }
     
-    /* Remove dish from the menu */
+    /* Remove dish from the menu. Identify the dish by its id. Both of the following should work:
+       model.removeFromMenu(DishSource.getDishData(3))
+       model.removeFromMenu({id:3})
+     */
     removeFromMenu(dish) {
 	//TODO 
     }
@@ -48,14 +51,6 @@ class DinnerModel {
 	//TODO 
     }
     
-    /* Week 2: Return an ingredient list, with each ingredient showing up maximum once, and the quantities added up.
-       Assume that the ingredient price is the same in all dishes that use a certain ingredient.
-       Advanced (bonus) : implement functionally, without variable assignments, for/loops() or if()
-    */
-    getIngredients(){
-	//TODO 
-    }
-
     /* Week 2: Utility method do compute a dish price depending on its ingredient prices and quantities.
      This method could be declared static as it does not depend on the DinnerModel data */
     getDishPrice(dish){
@@ -66,6 +61,17 @@ class DinnerModel {
     getDinnerPrice(){
 	//TODO 
     }    
+    /* Week 2: Return an ingredient list for the DinnerModel dishes, 
+       with each ingredient showing up maximum once, and the quantities added up.
+       Assume that the ingredient price is the same in all dishes that use a certain ingredient.
+
+       You can implement this method procedurally, or with a mix procedural/ functional.
+
+       Advanced (bonus) : implement functionally, without variable assignments, for/loops() or if()
+    */
+    getIngredients(){
+	//TODO 
+    }
 }
 
 /* A source of dish data, implemented with data from dishesConst.js. Can be implemented with a database or a web API...
