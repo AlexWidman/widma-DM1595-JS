@@ -12,6 +12,8 @@ To implement DinnerModel and DishSource, you only need to modify [js/DinnerModel
 
 The tests are provided for your convenience. Passing the tests is only the first step of passing the lab. You must be able to explain your code and the code may still be problematic in other ways that are not covered by the tests. We may also add more tests that check the above application logic rules.
 
+Hint: work in the order required by the tests! They are designed in increasing complexity order
+
 For troubleshooting, make sure to use the browser developer tools, which you can access by pressing F12 or Ctrl-Shift-i. Set a breakpoint at or before the line of code that fails.
 
 ## Setting up/git
@@ -28,6 +30,8 @@ When you are done with a lab, submit your KTH Git repository URL (and the name o
 ## Testing
 
 Open `index.html` in the browser and tests should run automatically
+
+Hint: work in the order required by the tests (not the order of the methods in the file)! They are designed in increasing complexity order
 
 Tests marked *W1* must pass during the JavaScript first week (individual). Week 1 is focused on simple procedural JavaScript.
 
