@@ -99,12 +99,12 @@ const  DishSource={
        Week 2: Search for dishes 
        searchParam can have the following properties (search criteria):
        - type: the dish type
-       - query: free text in dish name and ingredients
+       - query: free text in dish name 
        If no search criterion is specified, all dishes are returned.
        Example use: 
        DishSource.searchDishes({type:"main course", query:"pizza"})
        DishSource.searchDishes({type:"main course"})
-       DishSource.searchDishes({query:"flour"})
+       DishSource.searchDishes({query:"Meatba"})
        DishSource.searchDishes({})  returns all dishes
     */
     searchDishes(searchParams) {
