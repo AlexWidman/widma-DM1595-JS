@@ -170,7 +170,7 @@ describe("DinnerModel", function() {
 	});
 	it("returns all dishes if no search criteria are specified", () => {
 	    const allDishes = DishSource.searchDishes({});
-	    expect(allDishes.length).to.equal(10);
+	    expect(allDishes.length).to.equal(11);
 	});
 	testFunctional(DishSource.searchDishes);
 	
