@@ -292,3 +292,5 @@ const dishesConst = [{
   }]
 }
 ];
+
+Object.freeze(dishesConst);
