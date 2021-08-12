@@ -83,7 +83,39 @@ const dishesConst = [{
     'unit': '',
     'price': 4
   }]
-}, {
+},{
+  'id': 10,
+  'name': '"Sour Cream Cucumbers"',
+  'type': 'dessert',
+  'image': '1003815-556x370.jpg',
+  'description': "If you have about 15 minutes to spend in the kitchen, Sour Cream Cucumbers might be an awesome gluten free and lacto ovo vegetarian recipe to try. For 60 cents per serving, you get a side dish that serves 8. One portion of this dish contains roughly 2g of protein, 3g of fat, and a total of 66 calories. 2408 people were impressed by this recipe. If you have pepper, cucumbers, sugar, and a few other ingredients on hand, you can make it. It is brought to you by Taste of Home.",
+  'ingredients': [{
+  'name': 'sour cream',
+  'quantity': 1,
+  'unit': '',
+  'price': 10
+  }, {
+  'name': 'vinegar',
+  'quantity': 30,
+  'unit': 'ml',
+  'price': 6
+  }, {
+  'name': 'pepper',
+  'quantity': 7,
+  'unit': 'g',
+  'price': 1
+  }, {
+  'name': 'sugar',
+  'quantity': 0.5,
+  'unit': 'g',
+  'price': 12
+  }, {
+  'name': 'cucumbers',
+  'quantity': 1,
+  'unit': 'slices',
+  'price': 2
+  }]
+  }, {
   'id': 100,
   'name': 'Meat balls',
   'type': 'main dish',
