@@ -136,17 +136,6 @@ or mutable array methods like:
     });
 
     
-    describe("W2 async", () => {
-	it("getDishDetails asynchronous", async()=>{
-	    let start = new Date();
-	    let dish1=await new Promise(resolve=>DishSource.getDishDetailsAsync(1, resolve));
-	    let finish=new Date();
-	    expect(finish-start, "getDishDetailsAsync should take minimum 10 ms").to.be.above(10);
-	    expect(dish1.id).to.equal(1);
-	    expect(dish1.name).to.equal("French toast");
-	}).timeout(2000);
-    });
-
     describe("W2: make W1 methods functional", () => {
 	testFunctional(DishSource.getDishDetails);
 	testFunctional(model.addToMenu);
@@ -226,22 +215,37 @@ or mutable array methods like:
 	    expect(model.getDinnerPrice()).to.equal(2*(52+2559.5));
 	});
 	testFunctional(model.getDinnerPrice);
-	it("ingredients (procedural, functional is bonus!)", () => {
+	it("ingredients", () => {
 	    model.addToMenu(DishSource.getDishDetails(2));
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    expect(model.getIngredients()).to.include.deep.members([{quantity: 5, price: 10, name: "eggs", unit:''}]);
 	    expect(model.getIngredients()).to.include.deep.members([{quantity: 80, price: 0, name: "water", unit:'ml'}]);
 	});
-    });
-    describe("Advanced (bonus)", () => {
 	testFunctional(model.getIngredients);
-	it("getDishDetails promise", done=>{
-	    DishSource.getDishDetailsPromise(1).then(dish1=>{
-		expect(dish1.id).to.equal(1);
-		expect(dish1.name).to.equal("French toast");
-		done();
-	    });
+    });
+
+    function testPromise(text, p){
+	it(text, async()=>{
+	    let start = new Date();
+	    let dish1=await p;
+	    let finish=new Date();
+	    expect(finish-start, "async getDishDetails should take minimum 10 ms").to.be.above(10);
+	    expect(dish1.id).to.equal(1);
+	    expect(dish1.name).to.equal("French toast");
 	}).timeout(2000);
+    }
+    
+    describe("W2 async", () => {	
+	testPromise("getDishDetails asynchronous", new Promise(r=>DishSource.getDishDetailsAsync(1, r)));
+    });
+    
+    describe("Advanced (bonus)", () => {
+	it("ingredients without const, using e.g. reduce()", ()=>{
+	   expect(/(const\s+)/g
+		  .test((model.getIngredients.toString())), "getIngredients using reduce() should not declare a const").to.equal(false);
+	});
+	
+	testPromise("getDishDetails promise", DishSource.getDishDetailsPromise(1));
     });
 });
 

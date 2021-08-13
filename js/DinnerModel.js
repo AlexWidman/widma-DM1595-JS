@@ -64,16 +64,26 @@ class DinnerModel {
     getDinnerPrice(){
 	//TODO 
     }    
-    /* Week 2: Return an ingredient list for the DinnerModel dishes, 
+    /* Week 2: Return an array of ingredients for the DinnerModel dishes, 
        with each ingredient showing up maximum once, and the quantities added up.
-       Assume that the ingredient price is the same in all dishes that use a certain ingredient.
+       Assume that the ingredient price and measurement unit are the same in all dishes that use a certain ingredient.
 
-       You can implement this method procedurally, or with a mix procedural/ functional.
+       The implementation must be functional. The hints below define an object that collects all the ingredients, and then that object is changed by other functions (forEach callbacks) inside the method. 
 
-       Advanced (bonus) : implement functionally, without variable assignments, for/loops() or if()
+       Advanced (bonus) : implement functionally without defining a const, e.g. return dishes.reduce(TODO collect all ingredients in an array).reduce(TODO group ingredients by name in an object)...
     */
     getIngredients(){
-	//TODO 
+	// to make sure we have one entry for each ingredient name, the suitable data structure is a Dictionary,
+	// with ingredient names as keys
+	// All JavaScript objects are dictionaries, so we use an object called combinedIngredients to collect ingredient data. combinedIngredients[name] will return the ingredient object with the respective name
+	const combinedIngredients={};
+	
+	// TODO  for each dish (this.dishes.forEach() ), for each dish ingredient, set  combinedIngredients[name] to
+	// 1) a copy of the ingredient object if combinedIngredients[name] is falsy, i.e. we have not encoutered this ingredient yet during the forEach iterations
+	// 2) a copy of the ingredient object with an increased amount if combinedIngredients[name] is truthy, i.e. we have encountered this ingredient before
+	// functional code uses expressions rarhter than statements so use a ternary expression ? :  to distinguish between case (1) and (2)
+	
+	return /*TODO now we don't need the keys any longer, we just need an array of ingredients. Find the appropriate Object method for that */
     }
 }
 
@@ -86,19 +96,6 @@ const  DishSource={
     /* Returns a dish of specific ID */
     getDishDetails(id) {
 	//TODO 
-    },
-
-    /* Week 2: simulate fetching the dish asynchronously: 
-       assume that the callback parameter is a function.
-       wait for a random time (minimum 10ms, maximum 1000msc), then call the callback with the requested dish as parameter 
-       Example use:
-       DishSource.getDishDetailsAsync(5, dish=>console.log(dish))
-    */
-    getDishDetailsAsync(id, callback) {
-	let randomDelay = Math.random(); // returns random float from 0 to 1
-	// if you multiply the random with 500 you will get a random number from 0 to 500
-	// to ensure a certain minimum, just add that value to the random
-	//TODO
     },
 
     /* 
@@ -116,6 +113,21 @@ const  DishSource={
     searchDishes(searchParams) {
 	//TODO 
     },
+
+    /* Week 2: simulate retrieving the dish asynchronously: 
+       assume that the callback parameter is a function.
+       wait for a random time (minimum 10ms, maximum 1000msc), then call the callback with the requested dish as parameter 
+       Example use:
+       DishSource.getDishDetailsAsync(5, dish=>console.log(dish))
+    */
+    getDishDetailsAsync(id, callback) {
+	let randomDelay = Math.random(); // returns random float from 0 to 1
+	// if you multiply the random with 500 you will get a random number from 0 to 500
+	// to ensure a certain minimum, just add that value to the random
+	//TODO
+    },
+
+
     /* advanced: asynchronous dish  retrieval as a Promise 
        This can be implemented using getDishDetailsAsync by using a Promise constructor. The requirements are the same,
        the promise should resolve after minimum 10 ms maximum 1000 ms. Example use:
