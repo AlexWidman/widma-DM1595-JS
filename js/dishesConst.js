@@ -9,11 +9,16 @@ const dishesConst = [{
   'image': 'toast.jpg',
   'description': "In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.",
   'ingredients': [{
-    'name': 'eggs',
+    'name': 'egg white',
     'quantity': 1,
     'unit': '',
-    'price': 10
-  }, {
+    'price': 5
+  },{
+    'name': 'egg yolk',
+    'quantity': 1,
+    'unit': '',
+    'price': 5
+  },{
     'name': 'milk',
     'quantity': 30,
     'unit': 'ml',
@@ -46,7 +51,7 @@ const dishesConst = [{
 	'unit': '',
 	'price': 10
     },	{
-    'name': 'active dry yeast',
+    'name': 'water activated dry yeast',
     'quantity': 0.5,
     'unit': 'g',
     'price': 4
@@ -73,7 +78,7 @@ const dishesConst = [{
     'unit': 'g',
     'price': 8
   }, {
-    'name': 'raspberry preserves',
+    'name': 'round raspberry preserves',
     'quantity': 15,
     'unit': 'g',
     'price': 10
