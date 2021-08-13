@@ -7,11 +7,12 @@ class DinnerModel {
 	this.guests= guestsParam;  
 	
 	this.dishes= dishesParam.slice(0);  // we store a copy (clone) of dishesParam.
-	// JS objects (like arrays such as dishesParam) are sent as function parameters by reference not by value. 
-	// So we clone dishesParam to ensure that:
-	//       if the dishesParam array content is changed after the call to new DinnerModel(num, dishesParam),
-	//       then our DinnerModel object is *not* affected.
-	// Cloning can be also achieved using spread syntax (...) like so:  this.dishes= [...dishesParam];
+	// JS objects (like arrays such as dishesParam) are sent as function parameters by reference not by value.
+	// Therefore we are getting a reference to the dishesParam array, and anybody can still modify the array content!
+	// So we clone dishesParam to ensure that our DinnerModel object is *not* affected if the dishesParam array content is changed after the call to new DinnerModel(num, dishesParam),
+
+	// Week 2: cloning can be also achieved using spread syntax (...) like so:  this.dishes= [...dishesParam];
+	// or this.dishes=new Array(...dishesParam)
     }
     
     /* Set the number of guests to the given value. 
