@@ -3,13 +3,15 @@ class DinnerModel {
     
     /* Note the default value of function parameters */
     constructor(guestsParam/* FIXME default value 2 */, dishesParam=[] ) {
-	// note that you always need to use this when you refer to an object property!
+	// note that you always need to use "this." when you refer to an object property!
 	this.guests= guestsParam;  
 	
-	this.dishes= dishesParam.slice(0);  // clone the dishesParam array using its slice method.
-	// We clone it to ensure that if the dishesParam array content is changed after the call to new DinnerModel(num, dishesParam),
-	//    then our DinnerModel object is not affected.
-	// Can be also cloned using spread syntax (...) like so:  this.dishes= [...dishesParam];
+	this.dishes= dishesParam.slice(0);  // we store a copy (clone) of dishesParam.
+	// JS objects (like arrays such as dishesParam) are sent as function parameters by reference not by value. 
+	// So we clone dishesParam to ensure that:
+	//       if the dishesParam array content is changed after the call to new DinnerModel(num, dishesParam),
+	//       then our DinnerModel object is *not* affected.
+	// Cloning can be also achieved using spread syntax (...) like so:  this.dishes= [...dishesParam];
     }
     
     /* Set the number of guests to the given value. 
