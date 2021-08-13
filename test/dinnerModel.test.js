@@ -12,6 +12,7 @@ Implementation should not include procedural keywords like:
 'let', 'var' 
 or mutable methods like: 
 'push', 'for', 'while', 'if'
+
 `).to.equal(false);
 	      
 	  });
