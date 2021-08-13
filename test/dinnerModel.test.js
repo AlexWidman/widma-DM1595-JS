@@ -5,7 +5,7 @@ describe("DinnerModel", function() {
     
     const testFunctional = method =>	  
 	  it(method.name+" functional", ()=>{
-	      expect(/(var\s+|let\s+|for\s*\(|while\s*\(|if\s*\(|push\s*\(+|splice\s*\(+|unshift\s*\(+|pop\s*\(+|shift+)/g
+	      expect(/(var\s+|let\s+|for\s*\(|while\s*\(|if\s*\(|push\s*\(|splice\s*\(|unshift\s*\(|pop\s*\(|shift\s*\()/g
 		     .test(method.toString()), 
 		     `
 Implementation should be functional and therefore not include statements like: 
