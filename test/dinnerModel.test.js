@@ -6,7 +6,7 @@ const expect = chai.expect;
 describe("DinnerModel", function() {
     const testFunctional = method =>
 	  it(method.name+" functional", ()=>{
-	      expect(/(var\s+|let\s+|push+|splice+|unshift+|pop+|shift+|for\s*\(|while\s*\(|if\s*\()/g.test(method.toString()), 
+	      expect(/(var\s+|let\s+|push\s*\(|splice\s*\(|unshift\s*\(|pop\s*\(|shift\s*\(|for\s*\(|while\s*\(|if\s*\()/g.test(method.toString()), 
 		  `
 Implementation should be functional and not include procedural statements like: 
 'let', 'var', 'for', 'while', 'if' 
