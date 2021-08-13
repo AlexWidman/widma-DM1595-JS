@@ -88,12 +88,15 @@ const  DishSource={
 
     /* Week 2: simulate fetching the dish asynchronously: 
        assume that the callback parameter is a function.
-       wait for a random time (up to 1s), then call the callback with the requested dish as parameter 
+       wait for a random time (minimum 10ms, maximum 1000ms), then call the callback with the requested dish as parameter 
        Example use:
-       DishSource.getDishDetailsAsync(1, console.log)
+       DishSource.getDishDetailsAsync(5, dish=>console.log(dish))
     */
     getDishDetailsAsync(id, callback) {
-	//TODO 
+	let randomDelay = Math.random(); // returns random float from 0 to 1
+	// if you multiply the random with 500 you will get a random number from 0 to 500
+	// to ensure a certain minimum, just add that value to the random
+	//TODO
     },
 
     /* 

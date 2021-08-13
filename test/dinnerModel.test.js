@@ -128,14 +128,16 @@ describe("DinnerModel", function() {
 	    expect(model.getDishOfType(DishSource.getDishDetails(200).type)).to.equal(DishSource.getDishDetails(200));
 	});
     });
+
     
     describe("W2 async", () => {
-	it("getDishDetails asynchronous", done=>{
-	    DishSource.getDishDetailsAsync(1, dish1=>{
-		expect(dish1.id).to.equal(1);
-		expect(dish1.name).to.equal("French toast");
-		done();
-	    });
+	it("getDishDetails asynchronous", async()=>{
+	    let start = new Date();
+	    let dish1=await new Promise(resolve=>DishSource.getDishDetailsAsync(1, resolve));
+	    let finish=new Date();
+	    expect(finish-start, "getDishDetailsAsync should take minimum 10 ms").to.be.above(10);
+	    expect(dish1.id).to.equal(1);
+	    expect(dish1.name).to.equal("French toast");
 	}).timeout(2000);
     });
 
