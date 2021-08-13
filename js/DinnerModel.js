@@ -6,8 +6,7 @@ class DinnerModel {
 	// note that you always need to use this when you refer to an object property!
 	this.guests= guestsParam;  
 	
-	this.dishes= new Array(dishesParam);
-	// clone the dishesParam array 
+	this.dishes= dishesParam.slice(0);  // clone the dishesParam array using its slice method.
 	// We clone it to ensure that if the dishesParam array content is changed after the call to new DinnerModel(num, dishesParam),
 	//    then our DinnerModel object is not affected.
 	// Can be also cloned using spread syntax (...) like so:  this.dishes= [...dishesParam];
@@ -88,7 +87,7 @@ const  DishSource={
 
     /* Week 2: simulate fetching the dish asynchronously: 
        assume that the callback parameter is a function.
-       wait for a random time (minimum 10ms, maximum 1000ms), then call the callback with the requested dish as parameter 
+       wait for a random time (minimum 10ms, maximum 1000msc), then call the callback with the requested dish as parameter 
        Example use:
        DishSource.getDishDetailsAsync(5, dish=>console.log(dish))
     */
@@ -115,6 +114,8 @@ const  DishSource={
 	//TODO 
     },
     /* advanced: asynchronous dish  retrieval as a Promise 
+       This can be implemented using getDishDetailsAsync by using a Promise constructor. The requirements are the same,
+       the promise should resolve after minimum 10 ms maximum 1000 ms. Example use:
               DishSource.getDishDetailsPromise(1).then(console.log).catch(console.err)
      */
     getDishDetailsPromise(id) {
