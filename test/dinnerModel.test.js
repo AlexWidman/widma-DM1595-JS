@@ -227,7 +227,7 @@ or mutable array methods like:
     function testPromise(text, p){
 	it(text, async()=>{
 	    let start = new Date();
-	    let dish1=await p;
+	    let dish1=await p();
 	    let finish=new Date();
 	    expect(finish-start, "async getDishDetails should take minimum 10 ms").to.be.above(10);
 	    expect(dish1.id).to.equal(1);
@@ -236,7 +236,7 @@ or mutable array methods like:
     }
     
     describe("W2 async", () => {	
-	testPromise("getDishDetails asynchronous", new Promise(r=>DishSource.getDishDetailsAsync(1, r)));
+	testPromise("getDishDetails asynchronous", ()=>new Promise(r=>DishSource.getDishDetailsAsync(1, r)));
     });
     
     describe("Advanced (bonus)", () => {
@@ -245,7 +245,7 @@ or mutable array methods like:
 		  .test((model.getIngredients.toString())), "getIngredients using reduce() should not declare a const").to.equal(false);
 	});
 	
-	testPromise("getDishDetails promise", DishSource.getDishDetailsPromise(1));
+	testPromise("getDishDetails promise", ()=>DishSource.getDishDetailsPromise(1));
     });
 });
 
