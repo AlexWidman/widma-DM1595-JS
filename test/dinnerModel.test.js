@@ -229,23 +229,31 @@ or mutable array methods like:
 	    let start = new Date();
 	    let dish1=await p();
 	    let finish=new Date();
-	    expect(finish-start, "async getDishDetails should take minimum 10 ms").to.be.above(10);
-	    expect(dish1.id).to.equal(1);
-	    expect(dish1.name).to.equal("French toast");
+	    expect(finish-start, "promise getDishDetails should take minimum 2 ms").to.be.above(2);
+	    expect(dish1.id).to.equal(2);
+	    expect(dish1.name).to.equal("Sourdough starter");
 	}).timeout(2000);
     }
     
     describe("W2 async", () => {	
-	testPromise("getDishDetails asynchronous", ()=>new Promise(r=>DishSource.getDishDetailsAsync(1, r)));
+	testPromise("getDishDetails promise", ()=>DishSource.getDishDetailsPromise(2));
     });
     
     describe("Advanced (bonus)", () => {
 	it("ingredients without const, using e.g. reduce()", ()=>{
 	   expect(/(const\s+)/g
-		  .test((model.getIngredients.toString())), "getIngredients using reduce() should not declare a const").to.equal(false);
+		  .test((model.getIngredients.toString())), "getIngredients using reduce() must not declare a const").to.equal(false);
 	});
-	
-	testPromise("getDishDetails promise", ()=>DishSource.getDishDetailsPromise(1));
+	it("getDishDetails promise must reject if the dish with the given ID does not exist", async()=>{
+	    try{
+		const x= await new Promise((resolve, reject)=>DishSource.getDishDetailsPromise(-1).then(reject, resolve));
+		expect(x).to.not.be.null;
+	    }
+	    catch(e){assert.fail("the promise did not reject");}
+	}).timeout(2000);
+    });
+    describe("Advanced-optional", () => {
+	testFunctional(DishSource.getDishDetailsPromise);
     });
 });
 

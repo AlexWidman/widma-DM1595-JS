@@ -114,27 +114,22 @@ const  DishSource={
 	//TODO 
     },
 
-    /* Week 2: simulate retrieving the dish asynchronously: 
-       assume that the callback parameter is a function.
-       wait for a random time (minimum 10ms, maximum 1000msc), then call the callback with the requested dish as parameter 
+    /* Week 2: Retrieve a dish asynhronously by returning a Promise.
+       Read the dishes via fetch from this URL, which returns dishes in JSON format:
+       http://sunset.nada.kth.se:8080/iprog/file?DM1595/dishes.json
+       Then filter for the dish with the respective ID. 
        Example use:
-       DishSource.getDishDetailsAsync(5, dish=>console.log(dish))
+           DishSource.getDishDetailsPromise(2).then(dish=>console.log(dish))
+       Or: 
+           console.log(await DishSource.getDishDetailsPromise(2))
+
+      Advanced: If the dish with the respective ID does not exist, the returned promise must not resolve to undefined, but must reject. The test below will print on console.error (in red)
+           DishSource.getDishDetailsPromise(-1).then(dish=>console.log(dish)).catch(e=>console.error(e))
+
+      Optional-advanced: implement the promise rejection fully functionally (no statements), using e.g. a promise constructor  new Promise((resolve, reject)=> fetch(...)....then(TODO using the resolve and reject callbacks in e.g. a ?: ternary expression)
     */
-    getDishDetailsAsync(id, callback) {
-	let randomDelay = Math.random(); // returns random float from 0 to 1
-	// if you multiply the random with 500 you will get a random number from 0 to 500
-	// to ensure a certain minimum, just add that value to the random
-	//TODO
-    },
-
-
-    /* advanced: asynchronous dish  retrieval as a Promise 
-       This can be implemented using getDishDetailsAsync by using a Promise constructor. The requirements are the same,
-       the promise should resolve after minimum 10 ms maximum 1000 ms. Example use:
-              DishSource.getDishDetailsPromise(1).then(console.log).catch(console.err)
-     */
     getDishDetailsPromise(id) {
-	//TODO 
+	return fetch(/*TODO*/).then(/*TODO*/).then(/*TODO*/);
     },    // extra comma is legal in object properties
 };  /* good to have a semicolon after a let or const declaration */
 
