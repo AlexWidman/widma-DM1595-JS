@@ -18,8 +18,8 @@ For troubleshooting, make sure to use the browser developer tools, which you can
 
 ## Setting up/git
 - [set up your SSH key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for the KTH GitHub. Replace github.com in the instructions with  gits-15.sys.kth.se
-- create your own copy of this repository by pressing **Fork** at the top right.
-- checkout your KTH GitHub repository (created at the fork above) on your working computer using **git clone**
+- navigate to the respository given to you
+- checkout your KTH GitHub repository on your working computer using **git clone**
 - git **add** the files you modified, and **commit** as you make progress with the code
 - **push** to your KTH GitHub repository
 - in the second week, [invite your lab partner to your repository](https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/inviting-collaborators-to-a-personal-repository) and create a new *branch* to separate week 2 work from week 1
