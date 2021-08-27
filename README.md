@@ -17,13 +17,15 @@ Hint: work in the order required by the tests! They are designed in increasing c
 For troubleshooting, make sure to use the browser developer tools, which you can access by pressing F12 or Ctrl-Shift-i. Set a breakpoint at or before the line of code that fails.
 
 ## Setting up/git
+- make an account in the KTH git 
 - [set up your SSH key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for the KTH GitHub. Replace github.com in the instructions with  gits-15.sys.kth.se
-- navigate to the respository given to you
+- navigate to the respository created for you
 - checkout your KTH GitHub repository on your working computer using **git clone**
+- before every work session, run **git pull** to retrieve the latest code and avoid version conflicts
 - git **add** the files you modified, and **commit** as you make progress with the code
 - **push** to your KTH GitHub repository
 - in the second week, [invite your lab partner to your repository](https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/inviting-collaborators-to-a-personal-repository) and create a new *branch* to separate week 2 work from week 1
-- see [more git instructions](https://kth.instructure.com/courses/21175/pages/using-git)
+- see [more git instructions](https://canvas.kth.se/courses/27188/pages/using-git?module_item_id=352319)
 
 When you are done with a lab, submit your KTH Git repository URL (and the name of the relevant branch) as answer to the Canvas assignment.
 
