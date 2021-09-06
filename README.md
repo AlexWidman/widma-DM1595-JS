@@ -19,7 +19,7 @@ For troubleshooting, make sure to use the browser developer tools, which you can
 ## Setting up/git
 - make an account in the KTH git 
 - [set up your SSH key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for the KTH GitHub. Replace github.com in the instructions with  gits-15.sys.kth.se
-- navigate to the respository created for you, https://gits-15.sys.kth.se/iprog-students/<your-kth-username>-DM1595-JS
+- navigate to the respository created for you, https://gits-15.sys.kth.se/iprog-students/[your-kth-username]-DM1595-JS
 - checkout your KTH GitHub repository on your working computer using **git clone**
 - before every work session, run **git pull** to retrieve the latest code and avoid version conflicts
 - git **add** the files you modified, and **commit** as you make progress with the code
