@@ -72,6 +72,8 @@ or mutable array methods like:
     
     describe("W1 menu", () => {
 	it("can add dishes", () => {
+	    expect(/DishSource/g.test(model.addToMenu.toString()), 
+		   "DinnerModel may not use DishSource").to.equal(false);
 	    model.addToMenu(DishSource.getDishDetails(1));
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(1));
 	    expect(model.dishes.length).to.equal(1);
@@ -102,6 +104,8 @@ or mutable array methods like:
 	});
 	
 	it("can remove dishes", () => {
+	    expect(/DishSource/g.test(model.removeFromMenu.toString()), 
+		   "DinnerModel may not use DishSource").to.equal(false);
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    model.addToMenu(DishSource.getDishDetails(1));
 	    model.addToMenu(DishSource.getDishDetails(200));
@@ -128,6 +132,8 @@ or mutable array methods like:
 	});
 
 	it("dish of type", () => {
+	    expect(/DishSource/g.test(model.getDishOfType.toString()), 
+		   "DinnerModel may not use DishSource").to.equal(false);
 	    model.addToMenu(DishSource.getDishDetails(2));
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    model.addToMenu(DishSource.getDishDetails(200));
@@ -211,17 +217,23 @@ or mutable array methods like:
     
     describe("W2 totals", () => {
 	it("dish price", () => {
+	    expect(/DishSource/g.test(model.getDishPrice.toString()), 
+		   "DinnerModel may not use DishSource").to.equal(false);
 	    expect(model.getDishPrice(DishSource.getDishDetails(2))).to.equal(52);
 	    expect(model.getDishPrice(DishSource.getDishDetails(100))).to.equal(2559.5);
 	});
 	testFunctional(model.getDishPrice);
 	it("total price", () => {
+	    expect(/DishSource/g.test(model.getDinnerPrice.toString()), 
+		   "DinnerModel may not use DishSource").to.equal(false);
 	    model.addToMenu(DishSource.getDishDetails(2));
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    expect(model.getDinnerPrice()).to.equal(2*(52+2559.5));
 	});
 	testFunctional(model.getDinnerPrice);
 	it("ingredients", () => {
+	    expect(/DishSource/g.test(model.getIngredients.toString()), 
+		   "DinnerModel may not use DishSource").to.equal(false);
 	    model.addToMenu(DishSource.getDishDetails(2));
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    expect(model.getIngredients()).to.include.deep.members([{quantity: 5, price: 10, name: "eggs", unit:''}]);
