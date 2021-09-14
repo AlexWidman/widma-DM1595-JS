@@ -119,6 +119,12 @@ or mutable array methods like:
 	    expect(model.dishes.length).to.equal(2);
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(100));
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(200));
+
+	    // remove non-existing dish
+	    model.removeFromMenu({id:256});
+	    expect(model.dishes.length).to.equal(2);
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(100));
+	    expect(model.getMenu()).to.include(DishSource.getDishDetails(200));
 	});
 
 	it("dish of type", () => {
