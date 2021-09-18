@@ -4,13 +4,29 @@ const expect = chai.expect;
 describe("DinnerModel", function() {
 
     function removeComments(m){ return m.toString().replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, ""); }
+    const assignment= /[_$a-zA-Z\xA0-\uFFFF][_\.$a-zA-Z0-9\xA0-\uFFFF]*\s*=[^=><]/g;
+    
     function noDishSource(m){
 	expect(/DishSource/g.test(removeComments(m)), 
 	       "DinnerModel may not use DishSource").to.equal(false);
     }
+
+    function noAssignment(m, one=false){
+	it(m.name+" functional: "+(one?"a single assignment, to this.dishes":"no assignments "), ()=>{
+	    const matches= [...removeComments(m).matchAll(assignment)];
+	    if(one){
+		expect(matches.length, "may only assign this.dishes, once. It uses assignments: "+matches).to.equal(1);
+		expect(matches[0][0], "may only assign this.dishes, once").to.be.a('string');
+		expect(/^this.dishes\s*=/g.test(matches[0][0]), "may only assign this.dishes, once").to.equal(true);
+	    }else{
+		expect(matches.length, "may not use assignments. It uses "+matches).to.equal(0);
+	    }
+	    
+	});
+    }
     
     const testFunctional = method =>	  
-	  it(method.name+" functional", ()=>{
+	  it(method.name+" functional: no procedural statements or mutable methods", ()=>{
 	      expect(/(var\s+|let\s+|for\s*\(|while\s*\(|if\s*\(|push\s*\(|splice\s*\(|unshift\s*\(|pop\s*\(|shift\s*\()/g
 		     .test(removeComments(method)), 
 		     `
@@ -155,9 +171,16 @@ or mutable array methods like:
     
     describe("W2: make W1 methods functional", () => {
 	testFunctional(DishSource.getDishDetails);
+	noAssignment(DishSource.getDishDetails);
+
 	testFunctional(model.addToMenu);
+	noAssignment(model.addToMenu, true);
+
 	testFunctional(model.removeFromMenu);
+	noAssignment(model.removeFromMenu, true);
+	
 	testFunctional(model.getDishOfType);
+	noAssignment(model.getDishOfType);
     });
 
     describe("W2 immutable state", () => {
@@ -186,7 +209,6 @@ or mutable array methods like:
 	    const allDishes = DishSource.searchDishes({});
 	    expect(allDishes.length).to.equal(11);
 	});
-	testFunctional(DishSource.searchDishes);
 	
 	it("returns the correct dish type", () => {
 	    let dishes = DishSource.searchDishes({type:"starter"});
@@ -218,6 +240,9 @@ or mutable array methods like:
 	    expect(dishes.length).to.be.above(0);
 	    expect(allDishesMatch).to.equal(true);
 	});
+
+	testFunctional(DishSource.searchDishes);
+	noAssignment(DishSource.searchDishes);
     });
     
     describe("W2 totals", () => {
@@ -227,6 +252,7 @@ or mutable array methods like:
 	    expect(model.getDishPrice(DishSource.getDishDetails(100))).to.equal(2559.5);
 	});
 	testFunctional(model.getDishPrice);
+	noAssignment(model.getDishPrice);
 	it("total price", () => {
 	    noDishSource(model.getDinnerPrice);
 	    model.addToMenu(DishSource.getDishDetails(2));
@@ -234,6 +260,7 @@ or mutable array methods like:
 	    expect(model.getDinnerPrice()).to.equal(2*(52+2559.5));
 	});
 	testFunctional(model.getDinnerPrice);
+	noAssignment(model.getDinnerPrice);
 	it("ingredients", () => {
 	    noDishSource(model.getIngredients);
 	    model.addToMenu(DishSource.getDishDetails(2));
@@ -260,10 +287,7 @@ or mutable array methods like:
     });
     
     describe("Advanced (bonus)", () => {
-	it("ingredients without const, using e.g. reduce()", ()=>{
-	   expect(/(const\s+)/g
-		  .test(removeComments(model.getIngredients)), "getIngredients using reduce() must not declare a const").to.equal(false);
-	});
+	noAssignment(model.getIngredients);
 	it("getDishDetails promise must reject if the dish with the given ID does not exist", async()=>{
 	    try{
 		const x= await new Promise((resolve, reject)=>DishSource.getDishDetailsPromise(-1).then(reject, resolve));
@@ -274,6 +298,7 @@ or mutable array methods like:
     });
     describe("Advanced-optional", () => {
 	testFunctional(DishSource.getDishDetailsPromise);
+	noAssignment(DishSource.getDishDetailsPromise);
     });
 });
 
