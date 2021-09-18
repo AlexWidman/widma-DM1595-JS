@@ -43,10 +43,12 @@ or mutable array methods like:
 	    expect(model.getNumberOfGuests()).to.equal(1);
 	    model.setNumberOfGuests(2);
 	    expect(model.getNumberOfGuests()).to.equal(2);
+
+	    const msg= "number of guests not a positive integer";
 	    
-	    expect(()=>model.setNumberOfGuests(-1)).to.throw();
-	    expect(()=>model.setNumberOfGuests(0)).to.throw();
-	    expect(()=>model.setNumberOfGuests(3.14159265)).to.throw();
+	    expect(()=>model.setNumberOfGuests(-1)).to.throw(msg);
+	    expect(()=>model.setNumberOfGuests(0)).to.throw(msg);
+	    expect(()=>model.setNumberOfGuests(3.14159265)).to.throw(msg);
 	});
     });
     
