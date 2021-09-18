@@ -2,11 +2,17 @@ const assert = chai.assert;
 const expect = chai.expect;
 
 describe("DinnerModel", function() {
+
+    function removeComments(m){ return m.toString().replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, ""); }
+    function noDishSource(m){
+	expect(/DishSource/g.test(removeComments(m)), 
+	       "DinnerModel may not use DishSource").to.equal(false);
+    }
     
     const testFunctional = method =>	  
 	  it(method.name+" functional", ()=>{
 	      expect(/(var\s+|let\s+|for\s*\(|while\s*\(|if\s*\(|push\s*\(|splice\s*\(|unshift\s*\(|pop\s*\(|shift\s*\()/g
-		     .test(method.toString()), 
+		     .test(removeComments(method)), 
 		     `
 Implementation should be functional and therefore not include statements like: 
 'let', 'var', 'for', 'while', 'if' 
@@ -74,8 +80,7 @@ or mutable array methods like:
     
     describe("W1 menu", () => {
 	it("can add dishes", () => {
-	    expect(/DishSource/g.test(model.addToMenu.toString()), 
-		   "DinnerModel may not use DishSource").to.equal(false);
+	    noDishSource(model.addToMenu);
 	    model.addToMenu(DishSource.getDishDetails(1));
 	    expect(model.getMenu()).to.include(DishSource.getDishDetails(1));
 	    expect(model.dishes.length).to.equal(1);
@@ -106,8 +111,7 @@ or mutable array methods like:
 	});
 	
 	it("can remove dishes", () => {
-	    expect(/DishSource/g.test(model.removeFromMenu.toString()), 
-		   "DinnerModel may not use DishSource").to.equal(false);
+	    noDishSource(model.removeFromMenu);
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    model.addToMenu(DishSource.getDishDetails(1));
 	    model.addToMenu(DishSource.getDishDetails(200));
@@ -134,8 +138,7 @@ or mutable array methods like:
 	});
 
 	it("dish of type", () => {
-	    expect(/DishSource/g.test(model.getDishOfType.toString()), 
-		   "DinnerModel may not use DishSource").to.equal(false);
+	    noDishSource(model.getDishOfType);
 	    model.addToMenu(DishSource.getDishDetails(2));
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    model.addToMenu(DishSource.getDishDetails(200));
@@ -177,7 +180,7 @@ or mutable array methods like:
     });
     describe("W2 filtering for dishes", () => {
 	it("searchDishes uses destructuring for its parameter", ()=>{
-	    expect(/(searchDishes\s*\(\s*\{)/g.test(DishSource.searchDishes)).to.equal(true);
+	    expect(/(searchDishes\s*\(\s*\{)/g.test(removeComments(DishSource.searchDishes))).to.equal(true);
 	});
 	it("returns all dishes if no search criteria are specified", () => {
 	    const allDishes = DishSource.searchDishes({});
@@ -219,23 +222,20 @@ or mutable array methods like:
     
     describe("W2 totals", () => {
 	it("dish price", () => {
-	    expect(/DishSource/g.test(model.getDishPrice.toString()), 
-		   "DinnerModel may not use DishSource").to.equal(false);
+	    noDishSource(model.getDishPrice);
 	    expect(model.getDishPrice(DishSource.getDishDetails(2))).to.equal(52);
 	    expect(model.getDishPrice(DishSource.getDishDetails(100))).to.equal(2559.5);
 	});
 	testFunctional(model.getDishPrice);
 	it("total price", () => {
-	    expect(/DishSource/g.test(model.getDinnerPrice.toString()), 
-		   "DinnerModel may not use DishSource").to.equal(false);
+	    noDishSource(model.getDinnerPrice);
 	    model.addToMenu(DishSource.getDishDetails(2));
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    expect(model.getDinnerPrice()).to.equal(2*(52+2559.5));
 	});
 	testFunctional(model.getDinnerPrice);
 	it("ingredients", () => {
-	    expect(/DishSource/g.test(model.getIngredients.toString()), 
-		   "DinnerModel may not use DishSource").to.equal(false);
+	    noDishSource(model.getIngredients);
 	    model.addToMenu(DishSource.getDishDetails(2));
 	    model.addToMenu(DishSource.getDishDetails(100));
 	    expect(model.getIngredients()).to.include.deep.members([{quantity: 5, price: 10, name: "eggs", unit:''}]);
@@ -262,7 +262,7 @@ or mutable array methods like:
     describe("Advanced (bonus)", () => {
 	it("ingredients without const, using e.g. reduce()", ()=>{
 	   expect(/(const\s+)/g
-		  .test((model.getIngredients.toString())), "getIngredients using reduce() must not declare a const").to.equal(false);
+		  .test(removeComments(model.getIngredients)), "getIngredients using reduce() must not declare a const").to.equal(false);
 	});
 	it("getDishDetails promise must reject if the dish with the given ID does not exist", async()=>{
 	    try{
