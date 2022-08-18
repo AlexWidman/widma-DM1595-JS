@@ -41,6 +41,10 @@ Tests marked *W2* must pass during the second JavaScript week (work in pairs). W
 
 Tests marked Advanced(bonus) give one bonus each.
 
+## Asking for Help
+
+We maintain a git issues queue at [link](https://gits-15.sys.kth.se/iprog/js-issues/issues). In order to request help during a lab session, create a new git issue there and a TA will promptly join your Zoom room. For more instructions on how to properly create a git issue, refer to [link](https://gits-15.sys.kth.se/iprog/js-issues)
+
 ## What's in this repo
 -----
 
