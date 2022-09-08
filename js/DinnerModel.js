@@ -2,7 +2,7 @@
 class DinnerModel {
     
     /* Note the default value of function parameters */
-    constructor(guestsParam/* FIXME default value 2 */, dishesParam=[] ) {
+    constructor(guestsParam=2, dishesParam=[] ) {
         // note that you always need to use "this." when you refer to an object property!
         this.guests= guestsParam;  
         
@@ -13,16 +13,18 @@ class DinnerModel {
     /* Set the number of guests to the given value. 
        The value must be a positive integer, throw an Error otherwise.
      */
+
+    doThrow(msg){ throw new Error(msg); }
+
+    validatePositiveInteger(x){ return x>0 && Number.isInteger(x)? x: this.doThrow("number of guests not a positive integer") }
+
     setNumberOfGuests(num) {
-        // TODO in case num is not a poisitive integer throw an error with the message
-        //          "number of guests not a positive integer"
-        // 
-        // this.guests= TODO ;
+        this.guests = this.validatePositiveInteger(num)
     }
 
     /* Return the number of guests */ 
     getNumberOfGuests() {
-        // return this.  TODO 
+        return this.guests
     }
 
     // in W1 after you are done with number of guests you have to switch your attention to DishSource below, and implement getDishDetails
@@ -31,15 +33,14 @@ class DinnerModel {
     /* Return all the dishes on the menu. 
      */
     getMenu() {
-        // TODO
+        return this.dishes
     }
     
     /* add a dish to the menu. If a dish with the same type already exists, remove it first. 
     */
     addToMenu(dish) {
-        // a possible stepwise way to approach this:
-        // phase 1: use spread syntax to append to the dishes
-        // phase 2: use filter(CB) to remove the dish with the same type (if any), then append to the filter() result
+        this.dishes = this.dishes.filter(function(d){ return d.type !== dish.type })
+        this.dishes.push(dish);
     }
     
     /* Remove dish from the menu. Identify the dish by its id. Both of the following should work:
@@ -47,12 +48,12 @@ class DinnerModel {
        model.removeFromMenu({id:3})
      */
     removeFromMenu(dish) {
-        //TODO 
+        this.dishes = this.dishes.filter(function(d){ return d.id !== dish.id })
     }
 
     /* Return the dish of the given type from the menu, or undefined */
     getDishOfType(type){
-        //TODO 
+        return this.dishes.find(dish => dish.type === type)
     }
     
     /* Week 2: Utility method do compute a dish price depending on its ingredient prices and quantities.
@@ -98,7 +99,7 @@ class DinnerModel {
 const  DishSource={
     /* Returns a dish of specific ID */
     getDishDetails(id) {
-        //TODO 
+        return dishesConst.find(x => x.id === id)
     },
 
     /* 
@@ -134,4 +135,3 @@ const  DishSource={
         return fetch(/*TODO*/).then(/*TODO*/).then(/*TODO*/);
     },    // extra comma is legal in object properties
 };  /* good to have a semicolon after a let or const declaration */
-
