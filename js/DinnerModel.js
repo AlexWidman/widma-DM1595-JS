@@ -33,14 +33,15 @@ class DinnerModel {
     /* Return all the dishes on the menu. 
      */
     getMenu() {
-        return this.dishes
+        return [...this.dishes]
     }
     
     /* add a dish to the menu. If a dish with the same type already exists, remove it first. 
     */
     addToMenu(dish) {
-        this.dishes = this.dishes.filter(function(d){ return d.type !== dish.type })
-        this.dishes.push(dish);
+        function checkDishTypeCB(d){ return d.type !== dish.type }
+        this.dishes = [...this.dishes.filter(checkDishTypeCB), dish]
+        //this.dishes.push(dish); //don't use push, use this.dishes = [...this.dishes, dish]
     }
     
     /* Remove dish from the menu. Identify the dish by its id. Both of the following should work:
@@ -48,23 +49,31 @@ class DinnerModel {
        model.removeFromMenu({id:3})
      */
     removeFromMenu(dish) {
-        this.dishes = this.dishes.filter(function(d){ return d.id !== dish.id })
+        //place function here instead of one liner
+        function checkDishIDCB(d){ return d.id !== dish.id }
+        this.dishes = this.dishes.filter(checkDishIDCB) 
+        //place function as itself still ^^^^^ inside removeFromMenu for readability
     }
 
     /* Return the dish of the given type from the menu, or undefined */
     getDishOfType(type){
-        return this.dishes.find(dish => dish.type === type)
+        function findDishByTypeCB(dish){ return dish.type === type }
+        return this.dishes.find(findDishByTypeCB)
+        //return this.dishes.find(dish => dish.type === type) //avoid arrow => for W2
     }
     
     /* Week 2: Utility method do compute a dish price depending on its ingredient prices and quantities.
      This method could be declared static as it does not depend on the DinnerModel data */
     getDishPrice(dish){
-        //TODO 
+        function calcPricesCB(ingredient){ return ingredient.price * ingredient.quantity }
+        function sumPricesCB(accumulator, element){ return accumulator + element }
+        return dish.ingredients.map(calcPricesCB).reduce(sumPricesCB)
     }
 
     /* Week 2: Total price for the dinner given the number of guests */
     getDinnerPrice(){
-        //TODO 
+        function sumMenuPricesCB(accumulator, element){ return accumulator + element }
+        return this.dishes.map(this.getDishPrice).reduce(sumMenuPricesCB) * this.guests
     }
     
     /* Week 2: Return an array of ingredients for the DinnerModel dishes, 
@@ -80,14 +89,19 @@ class DinnerModel {
         // to make sure we have one entry for each ingredient name, the suitable data structure is a Dictionary,
         // with ingredient names as keys
         // All JavaScript objects are dictionaries, so we use an object called combinedIngredients to collect ingredient data. combinedIngredients[name] will return the ingredient object with the respective name
-        const combinedIngredients={};
+        //const combinedIngredients={};
         
         // TODO  for each dish (this.dishes.forEach(CB) ), for each dish ingredient, set  combinedIngredients[name] to
         // 1) a copy of the ingredient object IN CASE combinedIngredients[name] is falsy, i.e. we have not encoutered this ingredient yet during the forEach iterations
         // 2) a copy of the ingredient object with an increased amount IN CASE combinedIngredients[name] is truthy, i.e. we have encountered this ingredient before
         // functional code uses expressions rather than statements so use a conditional operator ? :  to distinguish between case (1) and (2)
-        
-        return /*TODO now we don't need the keys any longer, we just need an array of ingredients. Find the appropriate Object method for that */
+        function forEachDishCB(ingredientList, dish){ return [...ingredientList, ...dish.ingredients]}
+        function forEachIngredientCB(ingredientConst, ingredient){ 
+            return ingredientConst[ingredient.name]? 
+            {...ingredientConst,[ingredient.name]:{...ingredientConst[ingredient.name], quantity: ingredientConst[ingredient.name].quantity+ingredient.quantity}}: 
+            {...ingredientConst, [ingredient.name]: ingredient}}
+        return Object.values(this.dishes.reduce(forEachDishCB, []).reduce(forEachIngredientCB, {}))
+        /*TODO now we don't need the keys any longer, we just need an array of ingredients. Find the appropriate Object method for that */
     }
 }
 
@@ -99,7 +113,8 @@ class DinnerModel {
 const  DishSource={
     /* Returns a dish of specific ID */
     getDishDetails(id) {
-        return dishesConst.find(x => x.id === id)
+        function findDishByIDCB(dish){ return dish.id === id }
+        return dishesConst.filter(findDishByIDCB)[0]
     },
 
     /* 
@@ -115,7 +130,9 @@ const  DishSource={
        DishSource.searchDishes({})  returns all dishes
     */
     searchDishes(searchParams) {
-        //TODO 
+        function searchByTypeCB(dishes){ return dishes.type.includes(searchParams.type) }
+        function searchByQueryCB(dishes){ return dishes.name.includes(searchParams.query) }
+        return Object.keys(searchParams).length === 0? [...dishesConst]: [...dishesConst].filter(searchByTypeCB).filter(searchByQueryCB)
     },
 
     /* Week 2: Retrieve a dish asynhronously by returning a Promise.
@@ -132,6 +149,13 @@ const  DishSource={
             new Promise(function executorCB(resolve, reject){ fetch(...)....then(function that calls resolve and reject when appropriate); })
     */
     getDishDetailsPromise(id) {
-        return fetch(/*TODO*/).then(/*TODO*/).then(/*TODO*/);
+        function processHTTPResponseACB(response){return response.json();}
+        function getDishByIDCB(dish){ return dish.id === id }
+        function getDishCB(dish){ return dish.find(getDishByIDCB) }
+        function executorCB(resolve, reject){ this.getDishDetails(id) ? 
+            resolve(fetch("http://standup.csc.kth.se:8080/iprog/file?DM1595/dishes.json")
+            .then(processHTTPResponseACB)
+            .then(getDishCB)) : reject() }
+        return new Promise(executorCB.bind(this))
     },    // extra comma is legal in object properties
 };  /* good to have a semicolon after a let or const declaration */
