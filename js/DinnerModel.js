@@ -137,7 +137,6 @@ const  DishSource={
         'type' in searchParams && searchParams.type.trim().length !== 0? [...dishesConst].filter(searchByTypeCB):
         'query' in searchParams && searchParams.query.trim().length !== 0? [...dishesConst].filter(searchByQueryCB):
         [...dishesConst]
-        //return searchParams.query === ""
     },
 
     /* Week 2: Retrieve a dish asynhronously by returning a Promise.
