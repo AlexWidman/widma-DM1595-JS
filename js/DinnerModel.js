@@ -132,7 +132,12 @@ const  DishSource={
     searchDishes(searchParams) {
         function searchByTypeCB(dishes){ return dishes.type.includes(searchParams.type) }
         function searchByQueryCB(dishes){ return dishes.name.includes(searchParams.query) }
-        return Object.keys(searchParams).length === 0? [...dishesConst]: [...dishesConst].filter(searchByTypeCB).filter(searchByQueryCB)
+        return 'type' && 'query' in searchParams && searchParams.type.trim().length !== 0 && searchParams.query.trim().length !== 0? 
+        [...dishesConst].filter(searchByTypeCB).filter(searchByQueryCB):
+        'type' in searchParams && searchParams.type.trim().length !== 0? [...dishesConst].filter(searchByTypeCB):
+        'query' in searchParams && searchParams.query.trim().length !== 0? [...dishesConst].filter(searchByQueryCB):
+        [...dishesConst]
+        //return searchParams.query === ""
     },
 
     /* Week 2: Retrieve a dish asynhronously by returning a Promise.
@@ -151,11 +156,13 @@ const  DishSource={
     getDishDetailsPromise(id) {
         function processHTTPResponseACB(response){return response.json();}
         function getDishByIDCB(dish){ return dish.id === id }
-        function getDishCB(dish){ return dish.find(getDishByIDCB) }
-        function executorCB(resolve, reject){ this.getDishDetails(id) ? 
+        function getDishACB(dish){ return dish.find(getDishByIDCB) }
+        function checkUndefinedACB(dish){ return dish === undefined? Promise.reject(): dish}
+        function executorCB(resolve, reject){ 
             resolve(fetch("http://standup.csc.kth.se:8080/iprog/file?DM1595/dishes.json")
             .then(processHTTPResponseACB)
-            .then(getDishCB)) : reject() }
+            .then(getDishACB)
+            .then(checkUndefinedACB))}
         return new Promise(executorCB.bind(this))
     },    // extra comma is legal in object properties
 };  /* good to have a semicolon after a let or const declaration */
